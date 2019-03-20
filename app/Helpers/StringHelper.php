@@ -16,7 +16,7 @@ class StringHelper
      * @param string $attribute
      * @return string
      */
-    public static function upperCaseFirstChars(string $attribute)
+    public static function lowerStringAndUpperFirstChars(string $attribute)
     {
         return ucwords(strtolower($attribute));
     }

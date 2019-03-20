@@ -39,7 +39,7 @@ class BookCollectionMapper implements CollectionMapperInterface
      */
     private function mapTitle(string $title)
     {
-        return StringHelper::upperCaseFirstChars($title);
+        return StringHelper::lowerStringAndUpperFirstChars($title);
     }
 
     /**
@@ -48,6 +48,6 @@ class BookCollectionMapper implements CollectionMapperInterface
      */
     private function mapAuthorName(string $name)
     {
-        return StringHelper::upperCaseFirstChars($name);
+        return StringHelper::lowerStringAndUpperFirstChars($name);
     }
 }

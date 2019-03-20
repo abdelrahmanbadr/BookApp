@@ -11,6 +11,4 @@ namespace App\Domain\Contracts;
 
 interface BookRepositoryInterface extends RepositoryInterface
 {
-
-
 }

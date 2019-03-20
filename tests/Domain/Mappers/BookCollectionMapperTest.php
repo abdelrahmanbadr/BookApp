@@ -43,7 +43,6 @@ class BookCollectionMapperTest extends TestCase
                         "authorName" => "Cem Kaner",
                     ],
 
-
                 ],
 
             ],

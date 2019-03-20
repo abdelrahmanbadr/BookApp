@@ -17,7 +17,6 @@ use App\Domain\Services\{Criteria\CriteriaBuilder, BookService};
 
 class BookServiceFactory
 {
-
     /**
      * @return BookServiceInterface
      */

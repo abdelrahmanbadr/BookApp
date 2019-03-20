@@ -8,12 +8,14 @@
 
 namespace App\Domain\Services;
 
+use App\Domain\Constants\Constant;
 use App\Domain\Contracts\{BookRepositoryInterface,
     BookServiceInterface,
     CollectionMapperInterface,
     ExcelServiceInterface,
     XMLServiceInterface};
 use App\Domain\Exceptions\BadRequestException;
+use Illuminate\Support\Facades\Log;
 
 
 class BookService implements BookServiceInterface
@@ -63,6 +65,7 @@ class BookService implements BookServiceInterface
         try {
             $books = $this->repository->getAll($attributes);
         } catch (\Exception $e) {
+            Log::error("Error while getting all books, with error " . $e->getMessage());
             throw new BadRequestException();
         }
         return $this->mapper->map($books);
@@ -111,10 +114,28 @@ class BookService implements BookServiceInterface
      * @param string $exportType
      * @param array $attributes
      * @return string
+     * @throws BadRequestException
      */
     public function export(string $exportType, array $attributes): string
     {
-        //@todo implement here
+        if ($exportType == Constant::EXCEL_EXPORT) {
+            return $this->exportToExcel($attributes);
+        } elseif ($exportType == Constant::XML_EXPORT) {
+            return $this->exportToXML($attributes);
+        }
+        Log::error("not valid export type");
+        throw new BadRequestException();
+
+    }
+
+    private function exportToExcel(array $attributes)
+    {
+
+    }
+
+    private function exportToXML(array $attributes)
+    {
+
     }
 
     /**

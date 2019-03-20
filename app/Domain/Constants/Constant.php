@@ -17,4 +17,14 @@ class Constant
 
     const QUERY_PARAMETER_FILTER = "filters";
     const QUERY_PARAMETER_SORT = "sort";
+
+    const EXCEL_EXPORT = "csv";
+    const XML_EXPORT = "xml";
+
+    const EXCEL_SHEET_TITLE_BOOKS_TITLE_AND_AUTHOR = "Books titles with authors";
+    const EXCEL_SHEET_TITLE_BOOKS_TITLE_ONLY = "Books titles";
+    const EXCEL_SHEET_TITLE_BOOKS_AUTHORS_ONLY = "Books authors";
+    const FILE_PATH_BOOKS_TITLE_AND_AUTHOR = "exports/books_titles_authors";
+    const FILE_PATH_BOOKS_TITLE_ONLY = "exports/books_titles";
+    const FILE_PATH_BOOKS_AUTHORS_ONLY = "exports/books_authors";
 }

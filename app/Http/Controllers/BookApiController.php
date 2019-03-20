@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Domain\Contracts\BookServiceInterface;
+use App\Helpers\UrlHelper;
 use Illuminate\Http\Request;
 
 class BookApiController extends Controller
@@ -67,5 +68,20 @@ class BookApiController extends Controller
         $this->service->delete($id);
 
         return response()->json(null, 204);
+    }
+
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function export()
+    {
+        $attributes = [];
+        $uriPath = request()->route()->uri;
+        $exportType = UrlHelper::getLastPartOfPath($uriPath);
+        $filePath = public_path() . "/" . $this->service->export($exportType, $attributes);
+        $fileName = UrlHelper::getLastPartOfPath($filePath);
+
+        return response()->download($filePath, $fileName);
     }
 }

@@ -26,6 +26,8 @@ class BookServiceFactory
         $bookMapper = new BookCollectionMapper();
         $bookRepository = new EloquentBookRepository(new Book());
         $bookRepository->setCriteria(new CriteriaBuilder());
-        return new BookService($bookRepository, $bookMapper);
+        $excelService = (new ExcelServiceFactory())->make();
+        $xmlService = (new XMLServiceFactory())->make();
+        return new BookService($bookRepository, $bookMapper, $excelService, $xmlService);
     }
 }

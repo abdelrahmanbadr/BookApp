@@ -8,7 +8,11 @@
 
 namespace App\Domain\Services;
 
-use App\Domain\Contracts\{BookRepositoryInterface, BookServiceInterface, CollectionMapperInterface};
+use App\Domain\Contracts\{BookRepositoryInterface,
+    BookServiceInterface,
+    CollectionMapperInterface,
+    ExcelServiceInterface,
+    XMLServiceInterface};
 use App\Domain\Exceptions\BadRequestException;
 
 
@@ -23,17 +27,29 @@ class BookService implements BookServiceInterface
      * @var BookRepositoryInterface
      */
     private $repository;
+    /**
+     * @var ExcelServiceInterface
+     */
+    private $excelService;
+    /**
+     * @var XMLServiceInterface
+     */
+    private $xmlService;
 
 
     /**
      * BookService constructor.
      * @param BookRepositoryInterface $repository
      * @param CollectionMapperInterface $mapper
+     * @param ExcelServiceInterface $excelService
+     * @param XMLServiceInterface $xmlService
      */
-    public function __construct(BookRepositoryInterface $repository, CollectionMapperInterface $mapper)
+    public function __construct(BookRepositoryInterface $repository, CollectionMapperInterface $mapper, ExcelServiceInterface $excelService, XMLServiceInterface $xmlService)
     {
         $this->repository = $repository;
         $this->mapper = $mapper;
+        $this->excelService = $excelService;
+        $this->xmlService = $xmlService;
 
     }
 

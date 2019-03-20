@@ -12,8 +12,7 @@ namespace App\Helpers;
 class StringHelper
 {
     /**
-     *  Uppercase the first character of each word in a string
-     * @param string $attribute
+     * @param string $word
      * @return string
      */
     public static function lowerStringAndUpperFirstChars(string $word)
@@ -22,14 +21,32 @@ class StringHelper
     }
 
 
-    public static function contains(string $word, string $needle)
+    /**
+     * @param string $string
+     * @param string $needle
+     * @return bool
+     */
+    public static function contains(string $string, string $needle)
     {
-        return stripos($word, $needle) !== false;
+        return stripos($string, $needle) !== false;
     }
 
-    public static function removeSpecialChars(string $word)
+    /**
+     * @param string $string
+     * @return null|string|string[]
+     */
+    public static function removeSpecialChars(string $string)
     {
-        return preg_replace("/[^a-zA-Z]/", "", $word);
+        return preg_replace("/[^a-zA-Z]/", "", $string);
+    }
+
+    /**
+     * @param string $string
+     * @return array
+     */
+    public static function commaExplode(string $string)
+    {
+        return explode(',', $string);
     }
 
 }

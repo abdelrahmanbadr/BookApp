@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\Constants\Constant;
 use App\Domain\Contracts\BookServiceInterface;
+use App\Helpers\StringHelper;
 use App\Helpers\UrlHelper;
 use Illuminate\Http\Request;
 
@@ -76,10 +78,11 @@ class BookApiController extends Controller
      */
     public function export()
     {
-        $attributes = [];
-        $uriPath = request()->route()->uri;
-        $exportType = UrlHelper::getLastPartOfPath($uriPath);
-        $filePath = public_path() . "/" . $this->service->export($exportType, $attributes);
+        $fields = request()->get(Constant::QUERY_PARAMETER_EXPORT_FIELDS);
+        $fields = StringHelper::commaExplode($fields);
+
+        $exportType = request()->get(Constant::QUERY_PARAMETER_EXPORT_TYPE);
+        $filePath = public_path() . "/" . $this->service->export($exportType, $fields);
         $fileName = UrlHelper::getLastPartOfPath($filePath);
 
         return response()->download($filePath, $fileName);

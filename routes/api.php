@@ -16,6 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-//@todo add export route
 
+Route::get("books/export", "BookApiController@export");
 Route::Resource("books", "BookApiController");

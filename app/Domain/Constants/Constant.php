@@ -17,6 +17,8 @@ class Constant
 
     const QUERY_PARAMETER_FILTER = "filters";
     const QUERY_PARAMETER_SORT = "sort";
+    const QUERY_PARAMETER_EXPORT_TYPE = "type";
+    const QUERY_PARAMETER_EXPORT_FIELDS = "fields";
 
     const EXCEL_EXPORT = "csv";
     const XML_EXPORT = "xml";

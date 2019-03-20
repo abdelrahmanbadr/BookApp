@@ -13,9 +13,8 @@ interface CriteriaInterface
 {
     /**
      * @param $model
-     * @param RepositoryInterface $repository
      * @return mixed
      */
-    public function apply($model, RepositoryInterface $repository);
+    public function apply($model);
 
 }

@@ -9,6 +9,7 @@
 namespace App\Domain\Services\Criteria;
 
 use App\Domain\Contracts\CriteriaInterface;
+use Exception;
 
 class QueryFilter implements CriteriaInterface
 {
@@ -29,10 +30,7 @@ class QueryFilter implements CriteriaInterface
         $this->value = $value;
     }
 
-    /**
-     * @param $model
-     * @return mixed
-     */
+
     public function apply($model)
     {
         return $model->where($this->field, "like", "%{$this->value}%");

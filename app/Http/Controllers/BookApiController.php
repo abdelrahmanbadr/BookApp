@@ -29,7 +29,6 @@ class BookApiController extends Controller
         return response()->json($books, 200);
     }
 
-
     /**
      * Store a newly created resource in storage.
      *

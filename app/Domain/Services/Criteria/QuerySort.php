@@ -46,7 +46,7 @@ class QuerySort implements CriteriaInterface
      */
     public function apply($model)
     {
-        return $model->orderBy($this->orderBy);
+        return $model->orderBy($this->orderBy, $this->sortedBy);
     }
 
 }

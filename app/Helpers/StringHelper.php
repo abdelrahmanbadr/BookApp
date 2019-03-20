@@ -16,9 +16,20 @@ class StringHelper
      * @param string $attribute
      * @return string
      */
-    public static function lowerStringAndUpperFirstChars(string $attribute)
+    public static function lowerStringAndUpperFirstChars(string $word)
     {
-        return ucwords(strtolower($attribute));
+        return ucwords(strtolower($word));
+    }
+
+
+    public static function contains(string $word, string $needle)
+    {
+        return stripos($word, $needle) !== false;
+    }
+
+    public static function removeSpecialChars(string $word)
+    {
+        return preg_replace("/[^a-zA-Z]/", "", $word);
     }
 
 }

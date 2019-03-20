@@ -13,7 +13,8 @@ class Constant
 {
 
     const DEFAULT_DIRECTION = "asc";
+    const DESC_DIRECTION = "desc";
+
     const QUERY_PARAMETER_FILTER = "filters";
-    const QUERY_PARAMETER_SORT_BY = "orderBy";
-    const QUERY_PARAMETER_ORDER_BY = "sortedBy";
+    const QUERY_PARAMETER_SORT = "sort";
 }

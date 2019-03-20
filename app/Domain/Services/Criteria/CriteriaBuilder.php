@@ -9,6 +9,8 @@
 namespace App\Domain\Services\Criteria;
 
 use App\Domain\Constants\Constant;
+use App\Domain\Exceptions\BadRequestException;
+use App\Helpers\StringHelper;
 use Illuminate\Support\Collection;
 use App\Domain\Contracts\CriteriaInterface;
 
@@ -35,11 +37,10 @@ class CriteriaBuilder
     {
         $request = request();
         $filters = $request->get(Constant::QUERY_PARAMETER_FILTER);
-        $orderBy = $request->get(Constant::QUERY_PARAMETER_SORT_BY);
-        $sortedBy = $request->get(Constant::QUERY_PARAMETER_ORDER_BY);
+        $sort = $request->get(Constant::QUERY_PARAMETER_SORT);
 
-        if (!empty($orderBy)) {
-            $this->pushSortCriteria($orderBy, $sortedBy);
+        if (!empty($sort)) {
+            $this->pushSortCriteria($sort);
         }
 
         if (!empty($filters)) {
@@ -47,10 +48,9 @@ class CriteriaBuilder
         }
     }
 
-    private function pushFilterCriteria($filters)
+    private function pushFilterCriteria(string $filters)
     {
         $filters = explode(",", $filters);
-
         foreach ($filters as $filter) {
             $query = explode(':', $filter);
             $this->PushCriteria(new QueryFilter($query[0], $query[1]));
@@ -58,9 +58,13 @@ class CriteriaBuilder
 
     }
 
-    private function pushSortCriteria($orderBy, $sortedBy = Constant::DEFAULT_DIRECTION)
+    private function pushSortCriteria(string $sort)
     {
-        $this->PushCriteria(new QuerySort($orderBy, $sortedBy));
+        $orderBy = StringHelper::removeSpecialChars($sort);
+        if (StringHelper::contains($sort, "-")) {
+            $this->PushCriteria(new QuerySort($orderBy, Constant::DESC_DIRECTION));
+        }
+        $this->PushCriteria(new QuerySort($orderBy));
     }
 
 

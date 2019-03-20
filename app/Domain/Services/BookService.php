@@ -9,6 +9,7 @@
 namespace App\Domain\Services;
 
 use App\Domain\Contracts\{BookRepositoryInterface, BookServiceInterface, CollectionMapperInterface};
+use App\Domain\Exceptions\BadRequestException;
 
 
 class BookService implements BookServiceInterface
@@ -38,11 +39,16 @@ class BookService implements BookServiceInterface
 
     /**
      * @param array $attributes
-     * @return mixed
+     * @return array|mixed
+     * @throws BadRequestException
      */
     public function getAll($attributes = ['*'])
     {
-        $books = $this->repository->getAll($attributes);
+        try {
+            $books = $this->repository->getAll($attributes);
+        } catch (\Exception $e) {
+            throw new BadRequestException();
+        }
         return $this->mapper->map($books);
     }
 

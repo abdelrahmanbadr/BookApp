@@ -13,30 +13,86 @@ use App\Helpers\StringHelper;
 
 class StringHelpersTest extends TestCase
 {
-    public function dataProvider()
+    public function upperCaseFirstCharsDataProvider()
     {
         return [
             [
-                "input" => "test UPPER case string",
+                "string" => "test UPPER case string",
                 "expected" => "Test Upper Case String"
             ],
             [
-                "input" => "martin fowler",
+                "string" => "martin fowler",
                 "expected" => "Martin Fowler"
             ],
         ];
     }
 
+    public function containsDataProvider()
+    {
+        return [
+            [
+                "string" => "testing",
+                "needle" => "z",
+                "expected" => false,
+            ],
+            [
+                "string" => "input",
+                "needle" => "t",
+                "expected" => true
+            ],
+        ];
+    }
+
+
     /**
-     * @param string $input
+     * @param string $string
      * @param string $expected
-     * @dataProvider dataProvider
+     * @dataProvider upperCaseFirstCharsDataProvider
      *
      * @return void
      */
-    public function testUpperCaseFirstChars(string $input, string $expected)
+    public function testUpperCaseFirstChars(string $string, string $expected)
     {
-        $this->assertEquals($expected, StringHelper::lowerStringAndUpperFirstChars($input));
+        $this->assertEquals($expected, StringHelper::lowerStringAndUpperFirstChars($string));
+    }
+
+    /**
+     * @param string $string
+     * @param string $needle
+     * @param bool $expected
+     * @dataProvider containsDataProvider
+     *
+     * @return void
+     */
+    public function testContains(string $string, string $needle, bool $expected)
+    {
+        $this->assertEquals($expected, StringHelper::contains($string, $needle));
+    }
+
+    public function removeSpecialCharsDataProvider()
+    {
+        return [
+            [
+                "string" => "user-name",
+                "expected" => "username",
+            ],
+            [
+                "string" => "first_name",
+                "expected" => "firstname"
+            ],
+        ];
+    }
+
+    /**
+     * @param string $string
+     * @param string $expected
+     * @dataProvider removeSpecialCharsDataProvider
+     *
+     * @return void
+     */
+    public function testRemoveSpecialChars(string $string, string $expected)
+    {
+        $this->assertEquals($expected, StringHelper::removeSpecialChars($string));
     }
 
 }

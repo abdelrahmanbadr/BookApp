@@ -18,4 +18,11 @@ interface CollectionMapperInterface
      */
     public function map(Collection $collection): array;
 
+    /**
+     * @param array $books
+     * @param array $attributes
+     * @return array
+     */
+    public function mapKeys(array $books, array $attributes): array;
+
 }

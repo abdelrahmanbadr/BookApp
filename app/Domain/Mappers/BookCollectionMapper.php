@@ -16,6 +16,10 @@ use stdClass;
 
 class BookCollectionMapper implements CollectionMapperInterface
 {
+    /**
+     * @param Collection $books
+     * @return array
+     */
     public function map(Collection $books): array
     {
 
@@ -24,6 +28,34 @@ class BookCollectionMapper implements CollectionMapperInterface
         })->toArray();
     }
 
+    /**
+     * @param array $books
+     * @param array $attributes
+     * @return array
+     */
+    public function mapKeys(array $books, array $attributes = []): array
+    {
+        if (empty($books)) {
+            return [];
+        }
+        $mappedBooks = [];
+        foreach ($books as $key => $book) {
+            $key++;
+            if (empty($attributes)) {
+                $mappedBooks["Author " . $key] = ["title" => $book->title, "authorName" => $book->authorName];
+            } else {
+                foreach ($attributes as $attribute) {
+                    $mappedBooks["Author " . $key] = [$attribute => $book->$attribute, $attribute => $book->$attribute];
+                }
+            }
+        }
+        return $mappedBooks;
+    }
+
+    /**
+     * @param $book
+     * @return stdClass
+     */
     private function mapOne($book)
     {
         $mappedBook = new stdClass();
@@ -34,7 +66,7 @@ class BookCollectionMapper implements CollectionMapperInterface
     }
 
     /**
-     * @param string $name
+     * @param string $title
      * @return string
      */
     private function mapTitle(string $title)

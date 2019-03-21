@@ -140,9 +140,9 @@ class BookService implements BookServiceInterface
         $sheet->setTitle(Constant::EXCEL_SHEET_BOOKS_TITLE);
 
         if (empty($fields)) {
-            $this->exportAllFieldsToExcel($sheet);
+            $this->setCellsWithAllFields($sheet);
         } else {
-            $this->exportFieldsToExcel($sheet, $fields);
+            $this->setCellsWithSpecificFields($sheet, $fields);
         }
 
         return $this->excelService->saveExcelSheet(Constant::FILE_PATH_EXCEL_BOOKS);
@@ -153,10 +153,9 @@ class BookService implements BookServiceInterface
      * @param $fields
      * @throws BadRequestException
      */
-    private function exportFieldsToExcel(&$sheet, $fields)
+    private function setCellsWithSpecificFields(&$sheet, $fields)
     {
-        //@todo rename this function
-        foreach ($this->getAll() as $key => $book) {
+        foreach ($this->getAll($fields) as $key => $book) {
             $key++;
             foreach ($fields as $fieldKey => $field) {
                 if (isset($book->$field)) {
@@ -172,29 +171,20 @@ class BookService implements BookServiceInterface
      * @param $sheet
      * @throws BadRequestException
      */
-    private function exportAllFieldsToExcel(&$sheet)
+    private function setCellsWithAllFields(&$sheet)
     {
-        //@todo rename this function
-
         foreach ($this->getAll() as $key => $book) {
             $key++;
             $sheet->setCellValue('A' . $key, $book->title);
             $sheet->setCellValue('B' . $key, $book->authorName);
         }
-
     }
 
     private function exportToXML(array $attributes)
     {
-
-    }
-
-    /**
-     * @param CollectionMapperInterface $mapper
-     */
-    public function setMapper(CollectionMapperInterface $mapper)
-    {
-        $this->mapper = $mapper;
+        $books = $this->getAll($attributes ?? ["*"]);
+        $xml = $this->xmlService->arrayToXML($this->mapper->mapKeys($books, $attributes));
+        return $this->xmlService->saveXMLFile(Constant::FILE_PATH_XML_BOOKS, $xml);
     }
 
 

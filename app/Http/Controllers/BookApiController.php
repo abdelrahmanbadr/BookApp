@@ -79,8 +79,12 @@ class BookApiController extends Controller
      */
     public function export(string $exportType)
     {
-        $fields = request()->get(Constant::QUERY_PARAMETER_EXPORT_FIELDS) ?? "";
-        $fields = StringHelper::commaExplode($fields);
+        $fields = request()->get(Constant::QUERY_PARAMETER_EXPORT_FIELDS);
+        if (isset($fields)) {
+            $fields = StringHelper::commaExplode($fields);
+        } else {
+            $fields = [];
+        }
         $filePath = public_path() . "/" . $this->service->export($exportType, $fields);
         $fileName = UrlHelper::getLastPartOfPath($filePath);
 

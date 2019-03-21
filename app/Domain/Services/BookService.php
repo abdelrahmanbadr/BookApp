@@ -129,33 +129,59 @@ class BookService implements BookServiceInterface
 
     }
 
-    private function exportToExcel(array $attributes)
+    /**
+     * @param array $fields
+     * @return string
+     * @throws BadRequestException
+     */
+    private function exportToExcel(array $fields)
     {
-
         $sheet = $this->excelService->getActiveSheet();
-        $sheet->setTitle(Constant::EXCEL_SHEET_TITLE_BOOKS_TITLE_AND_AUTHOR);
-        $sheet->setCellValue('A' . 1, "Title");
-        $sheet->setCellValue('B' . 1, "Author Name");
-        $counter = 1;
-        //@todo refactor this part
-        foreach ($this->getAll() as $book) {
-            $counter++;
-            if (!empty($attributes)) {
-                foreach ($attributes as $key => $attribute) {
+        $sheet->setTitle(Constant::EXCEL_SHEET_BOOKS_TITLE);
 
-                    if (isset($book->$attribute)) {
-                        $key++;
-                        $sheet->setCellValue(CommonHelper::columnLetter($key) . $counter, $book->$attribute);
-                    }
-                }
-            } else {
-                $sheet->setCellValue('A' . $counter, $book->title);
-                $sheet->setCellValue('B' . $counter, $book->authorName);
-            }
-
+        if (empty($fields)) {
+            $this->exportAllFieldsToExcel($sheet);
+        } else {
+            $this->exportFieldsToExcel($sheet, $fields);
         }
 
-        return $this->excelService->saveExcelSheet(Constant::FILE_PATH_BOOKS_TITLE_AND_AUTHOR);
+        return $this->excelService->saveExcelSheet(Constant::FILE_PATH_EXCEL_BOOKS);
+    }
+
+    /**
+     * @param $sheet
+     * @param $fields
+     * @throws BadRequestException
+     */
+    private function exportFieldsToExcel(&$sheet, $fields)
+    {
+        //@todo rename this function
+        foreach ($this->getAll() as $key => $book) {
+            $key++;
+            foreach ($fields as $fieldKey => $field) {
+                if (isset($book->$field)) {
+                    $fieldKey++;
+                    $sheet->setCellValue(CommonHelper::columnLetter($fieldKey) . $key, $book->$field);
+                }
+            }
+        }
+
+    }
+
+    /**
+     * @param $sheet
+     * @throws BadRequestException
+     */
+    private function exportAllFieldsToExcel(&$sheet)
+    {
+        //@todo rename this function
+
+        foreach ($this->getAll() as $key => $book) {
+            $key++;
+            $sheet->setCellValue('A' . $key, $book->title);
+            $sheet->setCellValue('B' . $key, $book->authorName);
+        }
+
     }
 
     private function exportToXML(array $attributes)

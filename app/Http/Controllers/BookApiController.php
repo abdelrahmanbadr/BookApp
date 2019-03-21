@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Domain\Constants\Constant;
 use App\Domain\Contracts\BookServiceInterface;
+use App\Domain\Entities\Book;
 use App\Helpers\StringHelper;
 use App\Helpers\UrlHelper;
+use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 use Illuminate\Http\Request;
 
 class BookApiController extends Controller
@@ -35,10 +38,10 @@ class BookApiController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  StoreBookRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBookRequest $request)
     {
         $books = $this->service->create($request->all());
         return response()->json($books, 201);
@@ -48,11 +51,11 @@ class BookApiController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  UpdateBookRequest $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBookRequest $request, $id)
     {
         $book = $this->service->update($id, $request->all());
 

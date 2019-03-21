@@ -74,14 +74,13 @@ class BookApiController extends Controller
 
 
     /**
+     * @param  string $exportType
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-    public function export()
+    public function export(string $exportType)
     {
-        $fields = request()->get(Constant::QUERY_PARAMETER_EXPORT_FIELDS);
+        $fields = request()->get(Constant::QUERY_PARAMETER_EXPORT_FIELDS) ?? "";
         $fields = StringHelper::commaExplode($fields);
-
-        $exportType = request()->get(Constant::QUERY_PARAMETER_EXPORT_TYPE);
         $filePath = public_path() . "/" . $this->service->export($exportType, $fields);
         $fileName = UrlHelper::getLastPartOfPath($filePath);
 

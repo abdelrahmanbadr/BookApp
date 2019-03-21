@@ -15,6 +15,7 @@ use App\Domain\Contracts\{BookRepositoryInterface,
     ExcelServiceInterface,
     XMLServiceInterface};
 use App\Domain\Exceptions\BadRequestException;
+use App\Helpers\CommonHelper;
 use Illuminate\Support\Facades\Log;
 
 
@@ -131,6 +132,30 @@ class BookService implements BookServiceInterface
     private function exportToExcel(array $attributes)
     {
 
+        $sheet = $this->excelService->getActiveSheet();
+        $sheet->setTitle(Constant::EXCEL_SHEET_TITLE_BOOKS_TITLE_AND_AUTHOR);
+        $sheet->setCellValue('A' . 1, "Title");
+        $sheet->setCellValue('B' . 1, "Author Name");
+        $counter = 1;
+        //@todo refactor this part
+        foreach ($this->getAll() as $book) {
+            $counter++;
+            if (!empty($attributes)) {
+                foreach ($attributes as $key => $attribute) {
+
+                    if (isset($book->$attribute)) {
+                        $key++;
+                        $sheet->setCellValue(CommonHelper::columnLetter($key) . $counter, $book->$attribute);
+                    }
+                }
+            } else {
+                $sheet->setCellValue('A' . $counter, $book->title);
+                $sheet->setCellValue('B' . $counter, $book->authorName);
+            }
+
+        }
+
+        return $this->excelService->saveExcelSheet(Constant::FILE_PATH_BOOKS_TITLE_AND_AUTHOR);
     }
 
     private function exportToXML(array $attributes)

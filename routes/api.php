@@ -17,5 +17,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get("books/export/{type}", "BookApiController@export");
-Route::Resource("books", "BookApiController");
+Route::get("books/export/{type}", "Api\BookApiController@export");
+Route::Resource("books", "Api\BookApiController");

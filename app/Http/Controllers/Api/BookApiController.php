@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Domain\Constants\Constant;
 use App\Domain\Contracts\BookServiceInterface;
@@ -8,6 +8,7 @@ use App\Helpers\StringHelper;
 use App\Helpers\UrlHelper;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use App\Http\Controllers\Controller;
 
 class BookApiController extends Controller
 {

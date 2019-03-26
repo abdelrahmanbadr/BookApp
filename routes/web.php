@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::Resource("books", "BookController", ['names' => [
+    'index' => 'books',
+    'store' => 'books.create',
+]]);

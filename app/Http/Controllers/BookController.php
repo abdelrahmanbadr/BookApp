@@ -2,29 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBookRequest;
 use Illuminate\Http\Request;
+use App\Domain\Contracts\BookServiceInterface;
 
 class BookController extends Controller
 {
+    /**
+     * @var BookServiceInterface
+     */
+    private $service;
+
+    public function __construct(BookServiceInterface $bookService)
+    {
+        $this->service = $bookService;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+        public function index()
     {
-        //
+        $books = $this->service->getAll();
+        return view("books.index", compact("books"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -32,9 +36,9 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBookRequest $request)
     {
-        //
+
     }
 
     /**

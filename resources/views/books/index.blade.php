@@ -29,11 +29,11 @@
                     url: '/books/' + bookId,
                     data: {_token: getCSRFToken(), authorName: newValue},
                     success: (json) => {
-                        alert("Author updated successfully")
+                        swal("","Author updated successfully", "success")                       
                     },
                     error : (xhr, ajaxOptions, thrownError) => {
                         $("#authorName-" + bookId).val(oldValue)
-                        alert(xhr.responseJSON.errors.authorName[0])
+                        swal("",xhr.responseJSON.errors.authorName[0], "error")
                     },
                     method: "patch"
                 });
@@ -41,11 +41,6 @@
             this.setAttribute("disabled", "");
           
         });
-        function disable(el) {
-           
-        }
-        
-      
     </script>
      <!-- script end -->
 
@@ -60,7 +55,7 @@
                 data: {_token: getCSRFToken()},
                 success: (json) => {
                     $(this).parent().parent().remove();
-                    alert("Book Deleted successfully")
+                    swal("","Book deleted successfully", "success")
                 },
                 method: "delete"
             });

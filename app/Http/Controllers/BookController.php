@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 use Illuminate\Http\Request;
 use App\Domain\Contracts\BookServiceInterface;
 
@@ -33,46 +34,29 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreBookRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreBookRequest $request)
     {
-
+        $request->validated();
+        $book = $this->service->create($request->all());
+        return redirect()->route('books');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
+   
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  UpdateBookRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBookRequest $request, $id)
     {
-        //
+        $request->validated();
+        $book = $this->service->update($id, $request->all());
+        return response()->json($book, 201); 
     }
 
     /**
@@ -83,6 +67,7 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //return $this->service->delete($id);
+        return response()->json(null, 204);
     }
 }

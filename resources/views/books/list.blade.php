@@ -7,6 +7,10 @@
 
                     <div class="card-body">
                         <div class="col-md-12">
+                            <div>
+                                <input  type="text" placeholder="Search for a book by title or author"  name="search" class="form-control" >
+                            </div>
+                            <br>
                             <table class="table table-bordered">
                                 <thead>
                                 <tr class="d-flex">

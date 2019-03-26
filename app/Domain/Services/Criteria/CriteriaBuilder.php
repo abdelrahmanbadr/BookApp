@@ -38,6 +38,7 @@ class CriteriaBuilder
         $request = request();
         $filters = $request->get(Constant::QUERY_PARAMETER_FILTER);
         $sort = $request->get(Constant::QUERY_PARAMETER_SORT);
+        //make here search criteria if filter not used 
 
         if (!empty($sort)) {
             $this->pushSortCriteria($sort);

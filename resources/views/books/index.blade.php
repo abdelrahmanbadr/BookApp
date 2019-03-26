@@ -11,7 +11,6 @@
 @endsection
 @section('scripts')
     <script>
-        //@todo download jquery lib to local
         function edit(el) {
             el.childNodes[0].removeAttribute("disabled");
             el.childNodes[0].focus();
@@ -29,14 +28,14 @@
             }, 100);
         });
         function disable(el) {
-            var _token = $("input[name='_token']").val();
+            var CSRF_TOKEN = getCSRFToken()
             bookId = el.getAttribute('book-id');
             setTimeout(function () {
                 newValue = $("#authorName-" + bookId).val()
                 $.ajax({
                     url: '/books/' + bookId,
                     data: {_token: _token, authorName: newValue},
-                    success: function (data) {
+                    success: (json) => {
                     },
                     method: "put"
                 });
@@ -46,15 +45,33 @@
         function loadbooksList() {
             $("#booksList").load(document.URL + ' #booksList');
         }
-        $(document).on('click', '.delete-book', function (event) {
+      
+    </script>
+     <!-- script end -->
+
+    <!-- delete book from book list -->
+    <script>
+      $(document).on('click', '.delete-book', function (event) {
             event.preventDefault()
             bookId = $(this).attr('book-id');
-            $(this).parent().parent().remove();
+            
             $.ajax({
                 url: '/books/' + bookId,
-                data: {_token: _token},
+                data: {_token: getCSRFToken()},
+                success: (json) => {
+                    $(this).parent().parent().remove();
+                },
                 method: "delete"
             });
         });
     </script>
+    <!-- script end -->
+
+     <!-- common functions -->
+    <script>
+    function getCSRFToken() {
+        return $("input[name='_token']").val();
+    }
+    </script>
+     <!-- script end -->
 @endsection

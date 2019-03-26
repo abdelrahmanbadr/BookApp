@@ -9,7 +9,6 @@
 namespace App\Domain\Services\Criteria;
 
 use App\Domain\Contracts\CriteriaInterface;
-use Exception;
 
 class QueryFilter implements CriteriaInterface
 {

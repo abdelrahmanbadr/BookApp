@@ -17,6 +17,9 @@ class Constant
 
     const QUERY_PARAMETER_FILTER = "filters";
     const QUERY_PARAMETER_SORT = "sort";
+    const QUERY_PARAMETER_SEARCH = "search";
+    const QUERY_PARAMETER_SEARCH_FIELDS = "searchFields";
+
     const QUERY_PARAMETER_EXPORT_TYPE = "type";
     const QUERY_PARAMETER_EXPORT_FIELDS = "fields";
 

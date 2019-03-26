@@ -9,7 +9,6 @@
 namespace App\Domain\Services\Criteria;
 
 use App\Domain\Constants\Constant;
-use App\Domain\Exceptions\BadRequestException;
 use App\Helpers\StringHelper;
 use Illuminate\Support\Collection;
 use App\Domain\Contracts\CriteriaInterface;
@@ -38,7 +37,8 @@ class CriteriaBuilder
         $request = request();
         $filters = $request->get(Constant::QUERY_PARAMETER_FILTER);
         $sort = $request->get(Constant::QUERY_PARAMETER_SORT);
-        //make here search criteria if filter not used 
+        $search = $request->get(Constant::QUERY_PARAMETER_SEARCH);
+        $searchFields = $request->get(Constant::QUERY_PARAMETER_SEARCH_FIELDS);
 
         if (!empty($sort)) {
             $this->pushSortCriteria($sort);
@@ -47,6 +47,16 @@ class CriteriaBuilder
         if (!empty($filters)) {
             $this->pushFilterCriteria($filters);
         }
+
+        if (!empty($search) && (!empty($searchFields))) {
+            $this->pushSearchCriteria($search, $searchFields);
+        }
+    }
+
+    private function pushSearchCriteria(string $search, string $searchFields)
+    {
+        $fields = explode(",", $searchFields);
+        $this->PushCriteria(new QuerySearch($fields, $search));
     }
 
     private function pushFilterCriteria(string $filters)

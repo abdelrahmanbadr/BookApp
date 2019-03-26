@@ -51,7 +51,7 @@ abstract class BaseEloquentRepository implements RepositoryInterface
     {
         $this->applyCriteria();
 
-        return $this->entity->get();
+        return $this->entity->get($attributes);
     }
 
     /**

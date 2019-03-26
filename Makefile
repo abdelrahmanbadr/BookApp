@@ -45,7 +45,7 @@ permission:
 mysql_migrate:
 	$(BIN_DOCKER_COMPOSE) exec $(CONTAINER_PHP72) php artisan migrate
 
-init: build up install permission
+init: build up permission install 
 
 
 

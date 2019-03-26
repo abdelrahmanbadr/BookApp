@@ -46,7 +46,7 @@ services:
     - MYSQL_USER=root
     - MYSQL_PASSWORD=password
     ports:
-    - "3366:3306"
+    - "3306:3306"
 
 networks:
   yaraku-network:

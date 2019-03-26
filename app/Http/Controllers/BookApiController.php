@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Domain\Constants\Constant;
 use App\Domain\Contracts\BookServiceInterface;
-use App\Domain\Entities\Book;
 use App\Helpers\StringHelper;
 use App\Helpers\UrlHelper;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
-use Illuminate\Http\Request;
 
 class BookApiController extends Controller
 {
@@ -20,7 +18,6 @@ class BookApiController extends Controller
 
     public function __construct(BookServiceInterface $bookService)
     {
-        //@todo continuas testing for src/test
         $this->service = $bookService;
     }
 

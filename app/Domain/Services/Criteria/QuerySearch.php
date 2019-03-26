@@ -34,10 +34,10 @@ class QuerySearch implements CriteriaInterface
     {
         foreach ($this->fields as $key => $field) {
             if ($key == 0) {
-                $model = $model->where($field, $this->value);
+                $model = $model->where($field, "like", "%{$this->value}%");
                 continue;
             }
-            $model = $model->orWhere($field, $this->value);
+            $model = $model->orWhere($field, "like", "%{$this->value}%");
         }
       
         return $model;

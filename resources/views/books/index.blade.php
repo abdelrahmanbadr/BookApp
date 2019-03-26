@@ -42,9 +42,7 @@
             }, 100);
             el.setAttribute("disabled", "");
         }
-        function loadbooksList() {
-            $("#booksList").load(document.URL + ' #booksList');
-        }
+        
       
     </script>
      <!-- script end -->
@@ -65,13 +63,50 @@
             });
         });
     </script>
-    <!-- script end -->
+    <!-- delete book script end -->
 
-     <!-- common functions -->
+    <!-- sort  book list -->
     <script>
+     $(document).ready(function(){
+        $('input[type=radio][name=sort]').change(function() {
+            loadbooksList()
+        });
+
+         $('input[type=radio][name=order]').change(function() {
+            loadbooksList()
+        });
+    });
+
+    </script>
+    <!-- sort end -->
+
+    <!--  functions -->
+    <script>
+    
     function getCSRFToken() {
         return $("input[name='_token']").val();
     }
+    function buildUrl() {
+        searchInput =  $("#searchInput").val()
+        order = $( "input[type=radio][name=order]:checked" ).val();
+        sort = $( "input[type=radio][name=sort]:checked" ).val();
+        url = document.URL+"?search="+searchInput+"&searchFields=title,authorName"
+       
+        if (sort != undefined) {
+            if(order == "asc") {
+                url = url +"&sort=+"+sort
+            } else {
+                url = url +"&sort=-"+sort
+            }
+        }
+       
+        return url
+    }
+
+    function loadbooksList(url) {
+            url = buildUrl()
+            $("#booksList").load(url + ' #booksList'); //document.URL
+        }
     </script>
-     <!-- script end -->
+     <!-- functions script end -->
 @endsection

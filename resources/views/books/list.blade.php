@@ -1,16 +1,28 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
 
-<div id="booksList">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
-
-                    <div class="card-body">
-                        <div class="col-md-12">
-                            <div>
-                                <input  type="text" placeholder="Search for a book by title or author"  name="search" class="form-control" >
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <div class=" col-md-12 row">
+                            <input  type="text" placeholder="Search for a book by title or author"  id="searchInput" class="form-control col-md-6" onkeyup="loadbooksList()" >
+                           
+                            <div class="radio col-md-3" >
+                                <b> Sort By : </b>
+                                <label><input type="radio" value="title" name="sort" >Title</label>
+                                <label><input type="radio" value="authorName" name="sort">Author</label>
                             </div>
-                            <br>
+                            
+                            <div class="checkbox  col-md-3">
+                                <b> Order By : </b>
+                                <label><input type="radio" value="asc" name="order" checked>Asc</label>
+                                <label><input type="radio" value="desc" name="order">Desc</label>
+                            </div>
+                               
+                        </div>
+                        <br>
+                        <div id="booksList">
                             <table class="table table-bordered">
                                 <thead>
                                 <tr class="d-flex">
@@ -27,7 +39,7 @@
                                             {{--@todo use this better https://vitalets.github.io/x-editable/demo-bs3.html--}}
                                             <td class="col-4" ondblclick="edit(this)" >
                                                 <input id="authorName-{{$book->id}}" class="form-control" book-id="{{$book->id}}" value="{{$book->authorName}}" disabled
-                                                       onblur="disable(this)">
+                                                        onblur="disable(this)">
                                             </td>
 
                                             <td class="col-1">
@@ -44,8 +56,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+
         </div>
     </div>
 </div>

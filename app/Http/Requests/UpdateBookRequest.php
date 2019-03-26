@@ -23,9 +23,10 @@ class UpdateBookRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            "title" => "required|string|min:2|max:255",
-            "authorName" => "required|string|min:2|max:255|regex:/^[a-zA-Z ]+$/u",
-        ];
+        $rules = [];
+        if($this->has('name')) $rules['name'] = 'required|string|min:2|max:255';
+        if($this->has('authorName')) $rules['authorName'] = 'required|string|min:2|max:255|regex:/^[a-zA-Z ]+$/u';
+      
+        return $rules;
     }
 }

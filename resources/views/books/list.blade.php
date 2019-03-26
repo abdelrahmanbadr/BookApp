@@ -36,10 +36,8 @@
                                     @foreach($books as $book)
                                         <tr class="d-flex koko" >
                                             <td class="col-7">{{$book->title}}</td>
-                                            {{--@todo use this better https://vitalets.github.io/x-editable/demo-bs3.html--}}
-                                            <td class="col-4" ondblclick="edit(this)" >
-                                                <input id="authorName-{{$book->id}}" class="form-control" book-id="{{$book->id}}" value="{{$book->authorName}}" disabled
-                                                        onblur="disable(this)">
+                                            <td class="col-4">
+                                                <input id="authorName-{{$book->id}}" class="form-control authorName" book-id="{{$book->id}}" value="{{$book->authorName}}" disabled>
                                             </td>
 
                                             <td class="col-1">

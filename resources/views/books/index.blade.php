@@ -11,36 +11,38 @@
 @endsection
 @section('scripts')
     <script>
-        function edit(el) {
-            el.childNodes[0].removeAttribute("disabled");
-            el.childNodes[0].focus();
+        $(document).on('dblclick', '.authorName', function (ev) {
+            this.removeAttribute("disabled");
+            this.focus();
             window.getSelection().removeAllRanges();
-        }
-        $(".authorName-input").blur(function () {
-            $(this).setAttribute("disabled", "");
-            var t = $(this);
-            console.log("3######")
-            setTimeout(function () {
-                var t = $(this);
-                console.log(t.val())
-                if (t.val() == "") $t.next().text("This field is required.");
-                else t.next().text("");
-            }, 100);
         });
-        function disable(el) {
-            var CSRF_TOKEN = getCSRFToken()
-            bookId = el.getAttribute('book-id');
+        $(document).on('focusin', '.authorName', function () {
+            $(this).data('val', $(this).val());
+        });
+        
+        $(document).on('blur', '.authorName', function () {
+            oldValue = $(this).data('val');
+            bookId = this.getAttribute('book-id');
             setTimeout(function () {
                 newValue = $("#authorName-" + bookId).val()
                 $.ajax({
                     url: '/books/' + bookId,
-                    data: {_token: _token, authorName: newValue},
+                    data: {_token: getCSRFToken(), authorName: newValue},
                     success: (json) => {
+                        alert("Author updated successfully")
                     },
-                    method: "put"
+                    error : (xhr, ajaxOptions, thrownError) => {
+                        $("#authorName-" + bookId).val(oldValue)
+                        alert(xhr.responseJSON.errors.authorName[0])
+                    },
+                    method: "patch"
                 });
             }, 100);
-            el.setAttribute("disabled", "");
+            this.setAttribute("disabled", "");
+          
+        });
+        function disable(el) {
+           
         }
         
       
@@ -49,7 +51,7 @@
 
     <!-- delete book from book list -->
     <script>
-      $(document).on('click', '.delete-book', function (event) {
+        $(document).on('click', '.delete-book', function (event) {
             event.preventDefault()
             bookId = $(this).attr('book-id');
             
@@ -58,6 +60,7 @@
                 data: {_token: getCSRFToken()},
                 success: (json) => {
                     $(this).parent().parent().remove();
+                    alert("Book Deleted successfully")
                 },
                 method: "delete"
             });
@@ -67,46 +70,44 @@
 
     <!-- sort  book list -->
     <script>
-     $(document).ready(function(){
-        $('input[type=radio][name=sort]').change(function() {
-            loadbooksList()
-        });
+        $(document).ready(function(){
+            $('input[type=radio][name=sort]').change(function() {
+                loadbooksList()
+            });
 
-         $('input[type=radio][name=order]').change(function() {
-            loadbooksList()
+            $('input[type=radio][name=order]').change(function() {
+                loadbooksList()
+            });
         });
-    });
-
     </script>
     <!-- sort end -->
 
     <!--  functions -->
     <script>
-    
-    function getCSRFToken() {
-        return $("input[name='_token']").val();
-    }
-    function buildUrl() {
-        searchInput =  $("#searchInput").val()
-        order = $( "input[type=radio][name=order]:checked" ).val();
-        sort = $( "input[type=radio][name=sort]:checked" ).val();
-        url = document.URL+"?search="+searchInput+"&searchFields=title,authorName"
-       
-        if (sort != undefined) {
-            if(order == "asc") {
-                url = url +"&sort=+"+sort
-            } else {
-                url = url +"&sort=-"+sort
+        function getCSRFToken() {
+            return $("input[name='_token']").val();
+        }
+        function buildUrl() {
+            searchInput =  $("#searchInput").val()
+            order = $( "input[type=radio][name=order]:checked" ).val();
+            sort = $( "input[type=radio][name=sort]:checked" ).val();
+            url = document.URL+"?search="+searchInput+"&searchFields=title,authorName"
+        
+            if (sort != undefined) {
+                if(order == "asc") {
+                    url = url +"&sort=+"+sort
+                } else {
+                    url = url +"&sort=-"+sort
+                }
             }
+        
+            return url
         }
-       
-        return url
-    }
 
-    function loadbooksList(url) {
-            url = buildUrl()
-            $("#booksList").load(url + ' #booksList'); //document.URL
-        }
+        function loadbooksList(url) {
+                url = buildUrl()
+                $("#booksList").load(url + ' #booksList'); //document.URL
+            }
     </script>
      <!-- functions script end -->
 @endsection

@@ -22,7 +22,11 @@ you can replace `127.0.0.1` with your docker host machine ip.
 - Filter Desgin Pattern (Criteria pattern): To make sort, search and filter books.
 - Factory Desgin Pattern : To build BookService, ExcelService and XmlService objects. 
 
-#### Architecture
+
+#### Project structure
+- Domain : The domain layer is the heart of the software, and this is where the interesting stuff happens. There is one         package per aggregate, and to each aggregate belongs entities, value objects, domain events, a repository interface and       sometimes factories
+- Contracts : Has all interfaces of the domain.
+- Mappers : Mapping books to array of book objects. 
 - Service and Repository Layers :  Services and Repository used to hide and encapsulate App Logic 
 
 #### These are the other available command you might need in the future

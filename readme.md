@@ -1,11 +1,14 @@
-### Installation
 
 #### prerequisites
-install docker 
+install docker and docker-compose
 
-#### steps ton run the solution
+#### Installation 
+1- clone the project
 
-1. run the following command `make init` (this command will build , make host for the app, up docker-compose in background, change permission for storage and public folder and finally will run database migration)
+   $ git clone https://github.com/abdelrahmanbadr/BookApp
+   
+run the following command `make init` (this command will build , make host for the app, up docker-compose in background,
+composer install, change permission for storage and public folder and finally will run database migration)
 
 You can now access the solution from the browser via: `http://yaraku-task.local:8090\books`
 

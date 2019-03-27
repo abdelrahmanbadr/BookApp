@@ -12,6 +12,7 @@ use App\Domain\Entities\Book;
 use App\Domain\Mappers\BookCollectionMapper;
 use App\Domain\Repositories\EloquentBookRepository;
 use App\Domain\Services\BookService;
+use App\Domain\Services\Factory\{ExcelServiceFactory, XMLServiceFactory};
 use Mockery;
 use Tests\TestCase;
 
@@ -32,7 +33,9 @@ class BookServiceTest extends TestCase
     {
         parent::setUp();
         $this->bookRepositoryMock = Mockery::mock(EloquentBookRepository::class);
-        $this->service = new BookService($this->bookRepositoryMock, new BookCollectionMapper());
+        $excelService = (new ExcelServiceFactory())->make();
+        $xmlService = (new XMLServiceFactory())->make();
+        $this->service = new BookService($this->bookRepositoryMock, new BookCollectionMapper(), $excelService, $xmlService);
 
     }
 

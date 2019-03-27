@@ -37,6 +37,6 @@ you can replace `127.0.0.1` with your docker host machine ip.
  
  ## Improvments:
     1. Add cli command to export data to xml and csv
-    2- Separate author in another table and make his name is unique (on update can create new author if it's name not exsit)
+    2- Separate author in another table and make his name is unique
     3- Make more enhancment in UI (i made a simple UI) 
     4- add more logs to trace errors

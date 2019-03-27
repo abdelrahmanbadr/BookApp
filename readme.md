@@ -3,11 +3,16 @@
 install docker and docker-compose
 
 #### Installation 
-1- clone the project
-
-   $ git clone https://github.com/abdelrahmanbadr/BookApp
-   
-run the following command `make init` (this command will build , make host for the app, up docker-compose in background,
+ 
+ 1- clone the project
+ 
+    $ git clone https://github.com/abdelrahmanbadr/BookApp
+    
+ 2- copy the .env file 
+ 
+    $ cp .env.example .env
+ 
+3- run the following command `make init` (this command will build , make host for the app, up docker-compose in background,
 composer install, change permission for storage and public folder and finally will run database migration)
 
 You can now access the solution from the browser via: `http://yaraku-task.local:8090\books`
@@ -27,4 +32,11 @@ you can replace `127.0.0.1` with your docker host machine ip.
 
 - remove all images `make clear_images`
 
-- run unit tests `make phpunit_test`
+## Running Unit tests:
+    `make phpunit_test`
+    
+ ## Improvments:
+    1. Add cli command to export data to xml and csv
+    2- Separate author in another table and make his name is unique (on update can create new author if it's name not exsit)
+    3- Make more enhancment in UI (i made a simple UI) 
+    4- add more logs to trace errors

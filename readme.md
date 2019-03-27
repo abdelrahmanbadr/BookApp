@@ -32,7 +32,7 @@ sort                sorts the books by either title or authorName
             
 filter              filter books specific field
             e.g.:   http://yaraku-task.local:8090/books?filters=title:design
-             e.g.:   http://yaraku-task.local:8090/books?filters=authorName:pop
+            e.g.:   http://yaraku-task.local:8090/books?filters=authorName:pop
       
 ```
 

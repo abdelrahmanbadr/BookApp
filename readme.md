@@ -13,14 +13,32 @@ install docker and docker-compose
 3- run the following command `make init` (this command will build , make host for the app, up docker-compose in background,
 composer install, change permission for storage and public folder and finally will run database migration)
 
-You can now access the solution from the browser via: `http://yaraku-task.local:8090\books`
+You can now access the solution from the browser via: `http://yaraku-task.local:8090/books`
 
 Notice: in case it did not work you'll just need to update your hosts file `/etc/hosts` with `127.0.0.1 yaraku-task.local`
 you can replace `127.0.0.1` with your docker host machine ip.
 
+#### Query Parameters
+```
+search              searches books
+            e.g.:   http://yaraku-task.local:8090/books?search=code&searchFields=title,authorName
+            e.g.:   http://yaraku-task.local:8090/books?search=clean&searchFields=title
+            e.g.:   http://yaraku-task.local:8090/books?search=martin&searchFields=authorName
+            
+sort                sorts the books by either title or authorName
+            e.g.:   http://yaraku-task.local:8090/books?sort=title (ascending is the default)
+            e.g.:   http://yaraku-task.local:8090/books?sort=+authorName (ascending)
+            e.g.:   http://yaraku-task.local:8090/books?sort=-authorName (descending)
+            
+filter              filter books specific field
+            e.g.:   http://yaraku-task.local:8090/books?filters=title:design
+             e.g.:   http://yaraku-task.local:8090/books?filters=authorName:pop
+      
+```
+
 #### Design Pattern
 - Filter Desgin Pattern (Criteria pattern): To make sort, search and filter books.
-- Factory Desgin Pattern : To build BookService, ExcelService and XmlService objects. 
+- Factory Desgin Pattern : To create object without exposing the creation logic eg BookService, ExcelService and XmlService     objects.
 - Repository: To abstract the data layer, making our application more flexible to maintain.
 
 #### Project structure

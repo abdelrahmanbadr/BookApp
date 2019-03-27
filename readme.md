@@ -18,6 +18,13 @@ You can now access the solution from the browser via: `http://yaraku-task.local:
 Notice: in case it did not work you'll just need to update your hosts file `/etc/hosts` with `127.0.0.1 yaraku-task.local`
 you can replace `127.0.0.1` with your docker host machine ip.
 
+#### Design Pattern
+- Filter Desgin Pattern (Criteria pattern): To make sort, search and filter books.
+- Factory Desgin Pattern : To build BookService, ExcelService and XmlService objects. 
+
+#### Architecture
+- Service and Repository Layers :  Services and Repository used to hide and encapsulate App Logic 
+
 #### These are the other available command you might need in the future
 - stop all containers `make stop_all_containers`
 

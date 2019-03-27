@@ -21,8 +21,9 @@ build:
 	$(BIN_DOCKER_COMPOSE) build
 
 up:
-	sh ./update-hosts.sh
 	$(BIN_DOCKER_COMPOSE) up
+hosts:
+	sh ./update-hosts.sh
 
 phpunit_test:
 	$(BIN_DOCKER_COMPOSE) exec $(CONTAINER_PHP72) ./vendor/bin/phpunit
@@ -39,14 +40,11 @@ logs_nginx:
 php_composer_install:
 	$(BIN_DOCKER_COMPOSE) exec $(CONTAINER_PHP72) composer install
 
-permission:
+permissions:
 	$(BIN_DOCKER_COMPOSE) exec $(CONTAINER_PHP72) chmod 777 -R storage/
 	$(BIN_DOCKER_COMPOSE) exec $(CONTAINER_PHP72) chmod 777 -R public/
 
 mysql_migrate:
 	$(BIN_DOCKER_COMPOSE) exec $(CONTAINER_PHP72) php artisan migrate
 
-init: build up permission install 
-
-
-
+init: build hosts up_background php_composer_install permissions  mysql_migrate

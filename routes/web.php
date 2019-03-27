@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get("books/export/{type}", "BookController@export");
 Route::Resource("books", "BookController", ['names' => [
     'index' => 'books',
     'store' => 'books.create',

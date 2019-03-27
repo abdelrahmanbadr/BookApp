@@ -21,8 +21,7 @@ class BookCollectionMapper implements CollectionMapperInterface
      * @return array
      */
     public function map(Collection $books): array
-    {
-
+    {   
         return $books->map(function ($book) {
             return $this->mapOne($book);
         })->toArray();
@@ -60,8 +59,12 @@ class BookCollectionMapper implements CollectionMapperInterface
     {
         $mappedBook = new stdClass();
         $mappedBook->id = $book->id;
-        $mappedBook->title = $this->mapTitle($book->title);
-        $mappedBook->authorName = $this->mapAuthorName($book->authorName);
+        if (isset($book->title)) {
+            $mappedBook->title = $this->mapTitle($book->title);
+        }
+        if (isset($book->authorName)) {
+            $mappedBook->authorName = $this->mapAuthorName($book->authorName);
+        }
         return $mappedBook;
     }
 

@@ -2,8 +2,8 @@
 
 @section('content')
 
-{{--    @include('books.export')--}}
-    {{--<br>--}}
+ @include('books.export')
+    <br>
     @include('books.create')
     <br>
     @include('books.list')

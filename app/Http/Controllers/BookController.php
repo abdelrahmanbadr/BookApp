@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBookRequest;
-use App\Http\Requests\UpdateBookRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\{StoreBookRequest,UpdateBookRequest};
 use App\Domain\Contracts\BookServiceInterface;
+use App\Domain\Constants\Constant;
+use App\Helpers\{StringHelper,UrlHelper};
 
 class BookController extends Controller
 {
@@ -69,5 +69,23 @@ class BookController extends Controller
     {
         $this->service->delete($id);
         return response()->json(null, 204);
+    }
+
+     /**
+     * @param  string $exportType
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function export(string $exportType)
+    {
+        $fields = request()->get(Constant::QUERY_PARAMETER_EXPORT_FIELDS);
+        if (isset($fields)) {
+            $fields = StringHelper::commaExplode($fields);
+        } else {
+            $fields = [];
+        }
+        $filePath = public_path() . "/" . $this->service->export($exportType, $fields);
+        $fileName = UrlHelper::getLastPartOfPath($filePath);
+
+        return response()->download($filePath, $fileName);
     }
 }

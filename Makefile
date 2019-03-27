@@ -41,6 +41,7 @@ php_composer_install:
 
 permission:
 	$(BIN_DOCKER_COMPOSE) exec $(CONTAINER_PHP72) chmod 777 -R storage/
+	$(BIN_DOCKER_COMPOSE) exec $(CONTAINER_PHP72) chmod 777 -R public/
 
 mysql_migrate:
 	$(BIN_DOCKER_COMPOSE) exec $(CONTAINER_PHP72) php artisan migrate

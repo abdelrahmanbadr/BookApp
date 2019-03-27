@@ -180,10 +180,14 @@ class BookService implements BookServiceInterface
         }
     }
 
-    private function exportToXML(array $attributes)
+    private function exportToXML(array $fields)
     {
-        $books = $this->getAll($attributes ?? ["*"]);
-        $xml = $this->xmlService->arrayToXML($this->mapper->mapKeys($books, $attributes));
+        if (empty($fields)) {
+            $books = $this->getAll();
+        } else {
+            $books = $this->getAll($fields);
+        }
+        $xml = $this->xmlService->arrayToXML($this->mapper->mapKeys($books, $fields));
         return $this->xmlService->saveXMLFile(Constant::FILE_PATH_XML_BOOKS, $xml);
     }
 

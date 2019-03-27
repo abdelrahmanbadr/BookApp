@@ -21,13 +21,17 @@ you can replace `127.0.0.1` with your docker host machine ip.
 #### Design Pattern
 - Filter Desgin Pattern (Criteria pattern): To make sort, search and filter books.
 - Factory Desgin Pattern : To build BookService, ExcelService and XmlService objects. 
-
+- Repository: To abstract the data layer, making our application more flexible to maintain.
 
 #### Project structure
-- Domain : The domain layer is the heart of the software, and this is where the interesting stuff happens. There is one         package per aggregate, and to each aggregate belongs entities, value objects, domain events, a repository interface and       sometimes factories
-- Contracts : Has all interfaces of the domain.
+- Domain : The domain layer is the heart of the software, and this is where the interesting stuff happens.
+- Constants : Has all constants related to the book domain.
+- Contracts : Has all interfaces of book domain.
+- Entities : Has all entity models of book domain.
+- Exceptions : Has custom exceptions.
 - Mappers : Mapping books to array of book objects. 
-- Service and Repository Layers :  Services and Repository used to hide and encapsulate App Logic 
+- Repositories : Has BaseEloquentRepository and EloquentBookRepository
+- Services :  Services  used to hide and encapsulate App Logic 
 
 #### These are the other available command you might need in the future
 - stop all containers `make stop_all_containers`

@@ -33,8 +33,8 @@ you can replace `127.0.0.1` with your docker host machine ip.
 - remove all images `make clear_images`
 
 ## Running Unit tests:
-    `make phpunit_test`
-    
+    $ make phpunit_test
+ 
  ## Improvments:
     1. Add cli command to export data to xml and csv
     2- Separate author in another table and make his name is unique (on update can create new author if it's name not exsit)

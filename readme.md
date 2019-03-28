@@ -30,7 +30,7 @@ sort                sorts the books by either title or authorName
             e.g.:   http://yaraku-task.local:8090/books?sort=+authorName (ascending)
             e.g.:   http://yaraku-task.local:8090/books?sort=-authorName (descending)
             
-filter              filter books specific field
+filter              filter books by specific fields
             e.g.:   http://yaraku-task.local:8090/books?filters=title:design
             e.g.:   http://yaraku-task.local:8090/books?filters=authorName:pop,title:design
       

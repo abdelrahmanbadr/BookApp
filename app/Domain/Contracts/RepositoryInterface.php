@@ -58,5 +58,5 @@ interface RepositoryInterface
      */
     public function update(int $id, array $attributes);
 
-   
+
 }

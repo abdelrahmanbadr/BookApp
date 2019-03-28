@@ -6,20 +6,21 @@
                 <div class="card-body">
                     <div class="col-md-12">
                         <div class=" col-md-12 row">
-                            <input  type="text" placeholder="Search for a book by title or author"  id="searchInput" class="form-control col-md-6" onkeyup="loadbooksList()" >
-                           
-                            <div class="radio col-md-3" >
+                            <input type="text" placeholder="Search for a book by title or author" id="searchInput"
+                                   class="form-control col-md-6" onkeyup="loadbooksList()">
+
+                            <div class="radio col-md-3">
                                 <b> Sort By : </b>
-                                <label><input type="radio" value="title" name="sort" >Title</label>
+                                <label><input type="radio" value="title" name="sort">Title</label>
                                 <label><input type="radio" value="authorName" name="sort">Author</label>
                             </div>
-                            
+
                             <div class="checkbox  col-md-3">
                                 <b> Order By : </b>
                                 <label><input type="radio" value="asc" name="order" checked>Asc</label>
                                 <label><input type="radio" value="desc" name="order">Desc</label>
                             </div>
-                               
+
                         </div>
                         <br>
                         <div id="booksList">
@@ -34,10 +35,11 @@
                                 <tbody>
                                 @if(!empty($books))
                                     @foreach($books as $book)
-                                        <tr class="d-flex koko" >
+                                        <tr class="d-flex koko">
                                             <td class="col-7">{{$book->title}}</td>
                                             <td class="col-4">
-                                                <input id="authorName-{{$book->id}}" class="form-control authorName" book-id="{{$book->id}}" value="{{$book->authorName}}" disabled>
+                                                <input id="authorName-{{$book->id}}" class="form-control authorName"
+                                                       book-id="{{$book->id}}" value="{{$book->authorName}}" disabled>
                                             </td>
 
                                             <td class="col-1">

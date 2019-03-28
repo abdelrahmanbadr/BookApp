@@ -39,7 +39,7 @@ class QuerySearch implements CriteriaInterface
             }
             $model = $model->orWhere($field, "like", "%{$this->value}%");
         }
-      
+
         return $model;
     }
 }

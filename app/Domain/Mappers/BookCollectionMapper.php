@@ -21,7 +21,7 @@ class BookCollectionMapper implements CollectionMapperInterface
      * @return array
      */
     public function map(Collection $books): array
-    {   
+    {
         return $books->map(function ($book) {
             return $this->mapOne($book);
         })->toArray();

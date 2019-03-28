@@ -98,7 +98,6 @@ abstract class BaseEloquentRepository implements RepositoryInterface
     }
 
 
-
     /**
      * @param int $id
      * @return int

@@ -11,8 +11,10 @@ namespace App\Helpers;
 
 class CommonHelper
 {
-
-
+    /**
+     * @param int $number
+     * @return string
+     */
     public static function columnLetter(int $number)
     {
 

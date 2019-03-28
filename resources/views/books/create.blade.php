@@ -8,10 +8,13 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="title" class="col-md-4 required col-form-label text-md-right">{{ __('Title') }}</label>
+                            <label for="title"
+                                   class="col-md-4 required col-form-label text-md-right">{{ __('Title') }}</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" placeholder="Book Title" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('name') }}" required autofocus>
+                                <input id="title" type="text" placeholder="Book Title"
+                                       class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title"
+                                       value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('title'))
                                     <span class="invalid-feedback" role="alert">
@@ -21,10 +24,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="Author" class="col-md-4 required col-form-label text-md-right">{{ __('Author') }}</label>
+                            <label for="Author"
+                                   class="col-md-4 required col-form-label text-md-right">{{ __('Author') }}</label>
 
                             <div class="col-md-6">
-                                <input id="Author" type="text" placeholder="Author Name" class="form-control{{ $errors->has('authorName') ? ' is-invalid' : '' }}" name="authorName" value="{{ old('name') }}" required autofocus>
+                                <input id="Author" type="text" placeholder="Author Name"
+                                       class="form-control{{ $errors->has('authorName') ? ' is-invalid' : '' }}"
+                                       name="authorName" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('authorName'))
                                     <span class="invalid-feedback" role="alert">

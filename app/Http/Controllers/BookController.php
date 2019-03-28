@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\{StoreBookRequest,UpdateBookRequest};
+use App\Http\Requests\{StoreBookRequest, UpdateBookRequest};
 use App\Domain\Contracts\BookServiceInterface;
 use App\Domain\Constants\Constant;
-use App\Helpers\{StringHelper,UrlHelper};
+use App\Helpers\{StringHelper, UrlHelper};
 
 class BookController extends Controller
 {
@@ -24,7 +24,7 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-        public function index()
+    public function index()
     {
         $books = $this->service->getAll();
         return view("books.index", compact("books"));
@@ -34,7 +34,7 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  StoreBookRequest  $request
+     * @param  StoreBookRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreBookRequest $request)
@@ -44,25 +44,25 @@ class BookController extends Controller
         return redirect()->route('books');
     }
 
-   
+
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdateBookRequest  $request
-     * @param  int  $id
+     * @param  UpdateBookRequest $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateBookRequest $request, $id)
     {
         $request->validated();
         $book = $this->service->update($id, $request->all());
-        return response()->json($book, 201); 
+        return response()->json($book, 201);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -71,7 +71,7 @@ class BookController extends Controller
         return response()->json(null, 204);
     }
 
-     /**
+    /**
      * @param  string $exportType
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */

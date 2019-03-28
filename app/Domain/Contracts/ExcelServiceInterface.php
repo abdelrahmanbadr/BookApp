@@ -11,8 +11,14 @@ namespace App\Domain\Contracts;
 
 interface ExcelServiceInterface
 {
-
+    /**
+     * @return mixed
+     */
     public function getActiveSheet();
 
+    /**
+     * @param string $fileName
+     * @return string
+     */
     public function saveExcelSheet(string $fileName): string;
 }

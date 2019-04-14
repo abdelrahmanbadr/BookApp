@@ -70,4 +70,5 @@ filter              filter books by specific fields
 #### Should Have :
     1- Cache books if not changes (Cache::remember)
     2- Add php artisan db:seed (to fill books table)
+    3- Add soft delete
     

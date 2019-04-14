@@ -61,9 +61,13 @@ filter              filter books by specific fields
 #### Running Unit tests:
     $ make phpunit_test
  
-#### Improvments:
+#### Improvments(@todo):
     1. Add cli command to export data to xml and csv
     2- Separate author in another table and make his name is unique
     3- Make more enhancment in UI (i made a simple UI) 
     4- Add more logs to trace errors
     5- Write more test cases to increase code coverage
+#### Should Have :
+    1- Cache books if not changes (Cache::remember)
+    2- Add php artisan db:seed (to fill books table)
+    
